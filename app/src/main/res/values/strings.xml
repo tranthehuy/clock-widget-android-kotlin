@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MH Clock</string>
+    <string name="app_settings_name">mh_clock_key</string>
+    <string-array name="font_size_options">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
 </resources>
