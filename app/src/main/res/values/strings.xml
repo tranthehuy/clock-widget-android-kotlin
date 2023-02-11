@@ -6,4 +6,8 @@
         <item>Medium</item>
         <item>Large</item>
     </string-array>
+    <string-array name="quotes">
+        <item>...</item>
+        <item>... ...</item>
+    </string-array>
 </resources>

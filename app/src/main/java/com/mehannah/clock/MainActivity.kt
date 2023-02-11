@@ -13,12 +13,12 @@ import com.mehannah.clock.Utils.Companion.getSizeIndex
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appRef: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        appRef = getSharedPreferences(getString(R.string.app_settings_name), MODE_PRIVATE)
+
+        AppSettings.init(this, getString(R.string.app_settings_name))
 
         initUpdateButton();
     }
@@ -26,15 +26,12 @@ class MainActivity : AppCompatActivity() {
     private fun initUpdateButton () {
         val updateButton = findViewById<Button>(R.id.btnUpdate)
 
-        appRef.getString("font_size", "Large")
-            ?.let {
-                val selectedIndex = getSizeIndex(it)
-                findViewById<Spinner>(R.id.spFontSize).setSelection(selectedIndex)
-            }
+        val selectedIndex = getSizeIndex(AppSettings.getString("font_size", "Large"))
+        findViewById<Spinner>(R.id.spFontSize).setSelection(selectedIndex)
 
         updateButton.setOnClickListener(View.OnClickListener {
             val spFontSize = findViewById<Spinner>(R.id.spFontSize)
-            appRef.edit().putString("font_size", spFontSize.selectedItem.toString()).commit()
+            AppSettings.saveString("font_size", spFontSize.selectedItem.toString())
             this.updateWidgets()
         })
     }

@@ -5,16 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <android.widget.TextClock
+            android:id="@+id/date_clock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:format12Hour="dd/MMMM/yyyy"
+            android:format24Hour="dd/MMMM/yyyy"
+            android:gravity="center"
+            android:shadowColor="@color/black"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="4"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <android.widget.TextClock
             android:id="@+id/clock"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:format12Hour="k:mm"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:format12Hour="k:mm a"
             android:format24Hour="k:mm"
             android:gravity="center"
             android:shadowColor="@color/black"
@@ -23,7 +42,18 @@
             android:shadowRadius="4"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="96sp"
+            android:textSize="84dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvQuote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="&quot;&quot;"
+            android:textAlignment="center"
+            android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
+
 </LinearLayout>

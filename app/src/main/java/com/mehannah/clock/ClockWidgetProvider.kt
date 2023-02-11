@@ -1,18 +1,25 @@
 package com.mehannah.clock
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
+import android.content.Intent
 import android.util.TypedValue
 import android.widget.RemoteViews
+import kotlin.random.Random.Default.nextInt
 
 class ClockWidgetProvider : AppWidgetProvider() {
 
-    fun createViews(
+    private fun getRandomQuote(quotes: Array<String>): String {
+        val randomIndex = nextInt(quotes.size)
+        return quotes[randomIndex]
+    }
+
+    private fun createViews(
         context: Context,
-        pref: SharedPreferences
+        pendingIntent: PendingIntent
     ): RemoteViews {
         val layoutId: Int = R.layout.clock_layout
         val views = RemoteViews(
@@ -20,13 +27,17 @@ class ClockWidgetProvider : AppWidgetProvider() {
             layoutId
         )
 
-        pref.getString("font_size", "Large")
-            ?.let {
-                val fontSize = Utils.getSize(it)
-                views.setTextViewTextSize(R.id.clock,TypedValue.COMPLEX_UNIT_SP,
-                    fontSize.toFloat()
-                )
-            }
+        val fontSize = Utils.getSize(AppSettings.getString("font_size", "Large"))
+
+        val quote = getRandomQuote(context.resources.getStringArray(R.array.quotes))
+
+        views.setTextViewText(R.id.tvQuote, quote)
+
+        views.setTextViewTextSize(R.id.clock,TypedValue.COMPLEX_UNIT_SP,
+            fontSize.toFloat()
+        )
+
+        views.setOnClickPendingIntent(R.id.tvQuote, pendingIntent)
 
         return views;
     }
@@ -36,11 +47,23 @@ class ClockWidgetProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
+        AppSettings.init(context, context.getString(R.string.app_settings_name))
 
-        val pref = context.getSharedPreferences(context.getString(R.string.app_settings_name),MODE_PRIVATE);
+        // Get all ids
+        val thisWidget = ComponentName(
+            context,
+            ClockWidgetProvider::class.java
+        )
+
+        val ids = appWidgetManager.getAppWidgetIds(thisWidget)
+
+        val intent = Intent(context, ClockWidgetProvider::class.java)
+        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_MUTABLE)
 
         appWidgetIds.forEach { appWidgetId ->
-            appWidgetManager.updateAppWidget(appWidgetId, createViews(context, pref))
+            appWidgetManager.updateAppWidget(appWidgetId, createViews(context, pendingIntent))
         }
     }
 }
