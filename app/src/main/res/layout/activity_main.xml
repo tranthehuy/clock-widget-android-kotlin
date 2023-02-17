@@ -31,13 +31,25 @@
             android:id="@+id/tvFontSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Font Size" />
 
         <Spinner
             android:id="@+id/spFontSize"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvDateFormat"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/font_size_options" />
+            android:layout_marginTop="10dp"
+            android:text="Date Format" />
+
+        <Spinner
+            android:id="@+id/spDateFormat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnUpdate"

@@ -1,13 +1,8 @@
 <resources>
     <string name="app_name">MH Clock</string>
     <string name="app_settings_name">mh_clock_key</string>
-    <string-array name="font_size_options">
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-    </string-array>
     <string-array name="quotes">
-        <item>Quote 1</item>
-        <item>Quote 2</item>
+        <item>Chỉ có hai điều là vô hạn: vũ trụ và sự ngu xuẩn của con người, và tôi không chắc lắm về điều đầu tiên – Albert Einstein</item>
+        <item>Vẫn còn có ngày mai - chỉ là câu khiến người ta bắt đầu lười biếng</item>
     </string-array>
 </resources>

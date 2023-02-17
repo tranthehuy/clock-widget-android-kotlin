@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "name": "Large",
+      "value": "96"
+    },
+    {
+      "name": "Medium",
+      "value": "48"
+    },
+    {
+      "name": "Small",
+      "value": "24"
+    }
+  ]
+}

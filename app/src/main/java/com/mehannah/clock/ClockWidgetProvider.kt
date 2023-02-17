@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.util.TypedValue
 import android.widget.RemoteViews
+import com.mehannah.clock.constants.DATE_FORMAT
+import com.mehannah.clock.constants.FONT_SIZE
 import kotlin.random.Random.Default.nextInt
 
 class ClockWidgetProvider : AppWidgetProvider() {
@@ -27,11 +29,22 @@ class ClockWidgetProvider : AppWidgetProvider() {
             layoutId
         )
 
-        val fontSize = Utils.getSize(AppSettings.getString("font_size", "Large"))
+        val fontSize = Utils.getOptionValue(
+            AppSettings.getString(FONT_SIZE),
+            Utils.getJsonResource<Options>(context, R.raw.font_options)
+        )
+
+        val dateFormat = Utils.getOptionValue(
+            AppSettings.getString(DATE_FORMAT),
+            Utils.getJsonResource<Options>(context, R.raw.date_formats)
+        )
 
         val quote = getRandomQuote(context.resources.getStringArray(R.array.quotes))
 
         views.setTextViewText(R.id.tvQuote, quote)
+
+        views.setCharSequence(R.id.date_clock,"setFormat24Hour", dateFormat);
+        views.setCharSequence(R.id.date_clock,"setFormat12Hour", dateFormat);
 
         views.setTextViewTextSize(R.id.clock,TypedValue.COMPLEX_UNIT_SP,
             fontSize.toFloat()
