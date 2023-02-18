@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.TypedValue
 import android.widget.RemoteViews
 import com.mehannah.clock.constants.*
@@ -43,6 +44,11 @@ class ClockWidgetProvider : AppWidgetProvider() {
             Utils.getJsonResource<Options>(context, R.raw.time_formats)
         )
 
+        val textStyle = Utils.getOptionValue(
+            AppSettings.getString(TEXT_STYLE),
+            Utils.getJsonResource<Options>(context, R.raw.text_style)
+        )
+
         val quote = getRandomQuote(context.resources.getStringArray(R.array.quotes))
 
         views.setTextViewText(R.id.tvQuote, quote)
@@ -52,6 +58,10 @@ class ClockWidgetProvider : AppWidgetProvider() {
 
         views.setCharSequence(R.id.clock,"setFormat24Hour", timeFormat);
         views.setCharSequence(R.id.clock,"setFormat12Hour", timeFormat);
+
+        views.setTextColor(R.id.clock, Color.parseColor(textStyle));
+        views.setTextColor(R.id.date_clock, Color.parseColor(textStyle));
+        views.setTextColor(R.id.tvQuote, Color.parseColor(textStyle));
 
         views.setTextViewTextSize(R.id.clock,TypedValue.COMPLEX_UNIT_SP,
             fontSize.toFloat()

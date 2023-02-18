@@ -8,9 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.mehannah.clock.constants.DATE_FORMAT
-import com.mehannah.clock.constants.FONT_SIZE
-import com.mehannah.clock.constants.TIME_FORMAT
+import com.mehannah.clock.constants.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,9 +21,9 @@ class MainActivity : AppCompatActivity() {
         initOption(FONT_SIZE, R.raw.font_options, R.id.spFontSize)
         initOption(DATE_FORMAT, R.raw.date_formats, R.id.spDateFormat)
         initOption(TIME_FORMAT, R.raw.time_formats, R.id.spTimeFormat)
+        initOption(TEXT_STYLE, R.raw.text_style, R.id.spTextStyle)
 
         initUpdateButton()
-
     }
 
     private fun initOption(name: String, dataId: Int, componentId: Int) {
@@ -57,6 +55,9 @@ class MainActivity : AppCompatActivity() {
 
             val spTimeFormat = findViewById<Spinner>(R.id.spTimeFormat)
             AppSettings.saveString(TIME_FORMAT, spTimeFormat.selectedItem.toString())
+
+            val spTextStyle = findViewById<Spinner>(R.id.spTextStyle)
+            AppSettings.saveString(TEXT_STYLE, spTextStyle.selectedItem.toString())
 
             this.updateWidgets()
 
