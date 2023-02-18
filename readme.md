@@ -10,3 +10,5 @@
 - Change color of date and time
 
 ![Screenshot](screenshot.png?raw=true "Screenshot Android Widget")
+
+![Screenshot](screenshot_2.png?raw=true "Screenshot Android Widget Settings Screen")
