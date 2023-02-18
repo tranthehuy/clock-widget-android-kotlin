@@ -19,6 +19,12 @@ class ClockWidgetProvider : AppWidgetProvider() {
         return quotes[randomIndex]
     }
 
+    private fun getMainActivityIntent(context: Context, pendingIntent: PendingIntent): PendingIntent? {
+        val configIntent = Intent(context, MainActivity::class.java)
+        configIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        return PendingIntent.getActivity(context, 0, configIntent, PendingIntent.FLAG_UPDATE_CURRENT  + PendingIntent.FLAG_MUTABLE)
+    }
+
     private fun createViews(
         context: Context,
         pendingIntent: PendingIntent
@@ -68,6 +74,9 @@ class ClockWidgetProvider : AppWidgetProvider() {
         )
 
         views.setOnClickPendingIntent(R.id.tvQuote, pendingIntent)
+
+        val configPendingIntent = getMainActivityIntent(context, pendingIntent)
+        views.setOnClickPendingIntent(R.id.clock, configPendingIntent)
 
         return views;
     }
