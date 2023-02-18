@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "name": "HH:mm (24h)",
+      "value": "HH:mm"
+    },
+    {
+      "name": "HH:mm:ss (24h)",
+      "value": "HH:mm:ss"
+    },
+    {
+      "name": "hh:mm am/pm (12h)",
+      "value": "hh:mm a"
+    },
+    {
+      "name": "hh:mm (12h)",
+      "value": "hh:mm"
+    }
+  ]
+}
