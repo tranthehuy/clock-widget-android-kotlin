@@ -7,9 +7,17 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.util.Log
 import android.util.TypedValue
+import android.view.View
 import android.widget.RemoteViews
-import com.mehannah.clock.constants.*
+import com.mehannah.clock.constants.DATE_FORMAT
+import com.mehannah.clock.constants.FONT_SIZE
+import com.mehannah.clock.constants.TEXT_STYLE
+import com.mehannah.clock.constants.TIME_FORMAT
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.random.Random.Default.nextInt
 
 class ClockWidgetProvider : AppWidgetProvider() {
@@ -65,13 +73,40 @@ class ClockWidgetProvider : AppWidgetProvider() {
         views.setCharSequence(R.id.clock,"setFormat24Hour", timeFormat);
         views.setCharSequence(R.id.clock,"setFormat12Hour", timeFormat);
 
-        views.setTextColor(R.id.clock, Color.parseColor(textStyle));
-        views.setTextColor(R.id.date_clock, Color.parseColor(textStyle));
-        views.setTextColor(R.id.tvQuote, Color.parseColor(textStyle));
+        views.setTextColor(R.id.clock, Color.parseColor(textStyle))
+        views.setTextColor(R.id.date_clock, Color.parseColor(textStyle))
+        views.setTextColor(R.id.tvQuote, Color.parseColor(textStyle))
+        views.setTextColor(R.id.tvLunarDate, Color.parseColor(textStyle))
 
         views.setTextViewTextSize(R.id.clock,TypedValue.COMPLEX_UNIT_SP,
             fontSize.toFloat()
         )
+
+        try {
+            val dateSetting = AppSettings.getString(DATE_FORMAT)
+            val isHadLunarCalendar = dateSetting.contains("+")
+            val isHadLunarIcon = dateSetting.contains("Icon")
+            if (isHadLunarCalendar) {
+                val c = Calendar.getInstance()
+                val year = c.get(Calendar.YEAR)
+                val month = c.get(Calendar.MONTH) + 1
+                val day = c.get(Calendar.DAY_OF_MONTH)
+                val dateValues = LunarCalendar.convertSolar2Lunar(day, month, year, "7".toDouble());
+
+                val localDateTime = LocalDateTime.of(dateValues[2], dateValues[1], dateValues[0],0,0,0)
+                val formatter = DateTimeFormatter.ofPattern(dateFormat)
+
+                val prefix = if (isHadLunarIcon) "🌜" else "Âm lịch "
+                val lunarDateStr = prefix + formatter.format(localDateTime)
+                views.setTextViewText(R.id.tvLunarDate, lunarDateStr)
+                views.setViewVisibility(R.id.tvLunarDate, View.VISIBLE)
+            } else {
+                views.setViewVisibility(R.id.tvLunarDate, View.GONE)
+            }
+        } catch(err: Exception) {
+            Log.d("app_debug" , err.toString())
+            views.setViewVisibility(R.id.tvLunarDate, View.GONE)
+        }
 
         views.setOnClickPendingIntent(R.id.tvQuote, pendingIntent)
 

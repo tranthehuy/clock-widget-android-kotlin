@@ -7,6 +7,15 @@
     {
       "name": "yyyy-MM-dd",
       "value": "yyyy-MM-dd"
+    },
+    {
+      "name": "yyyy-MM-dd (+ Âm Lịch)",
+      "value": "yyyy-MM-dd"
+    },
+    {
+      "name": "yyyy-MM-dd (+ \uD83C\uDF1C (Funny Icon))",
+      "value": "yyyy-MM-dd"
     }
+
   ]
 }
