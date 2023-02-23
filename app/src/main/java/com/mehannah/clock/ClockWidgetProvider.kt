@@ -81,10 +81,10 @@ class ClockWidgetProvider : AppWidgetProvider() {
         val textStyleString = AppSettings.getString(TEXT_STYLE)
         if (textStyleString.contains("Background", true)) {
             if (textStyleString.contains("White Background", true)) {
-                views.setInt(R.id.widget, "setBackgroundColor", Color.WHITE);
+                views.setInt(R.id.widget, "setBackgroundColor", Color.parseColor("#CCFFFFFF"));
             }
             if (textStyleString.contains("Black Background", true)) {
-                views.setInt(R.id.widget, "setBackgroundColor", Color.BLACK);
+                views.setInt(R.id.widget, "setBackgroundColor", Color.parseColor("#CC000000"));
             }
         } else {
             views.setInt(R.id.widget, "setBackgroundColor", Color.TRANSPARENT);
