@@ -1,12 +1,16 @@
 {
   "items": [
     {
-      "name": "dd/MMMM/yyyy",
-      "value": "dd/MMMM/yyyy"
-    },
-    {
       "name": "yyyy-MM-dd",
       "value": "yyyy-MM-dd"
+    },
+    {
+      "name": "EEEE, dd/MMMM/yyyy",
+      "value": "EEEE, dd/MMMM/yyyy"
+    },
+    {
+      "name": "EEEE, dd/MMMM/yyyy (+ Âm Lịch)",
+      "value": "EEEE, dd/MMMM/yyyy"
     },
     {
       "name": "yyyy-MM-dd (+ Âm Lịch)",

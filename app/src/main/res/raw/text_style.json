@@ -5,7 +5,15 @@
       "value": "#FFFFFF"
     },
     {
+      "name": "White with Black Background",
+      "value": "#FFFFFF"
+    },
+    {
       "name": "Red",
+      "value": "#FF0000"
+    },
+    {
+      "name": "Red with White Background",
       "value": "#FF0000"
     },
     {
@@ -13,7 +21,15 @@
       "value": "#00FF00"
     },
     {
+      "name": "Green with Black Background",
+      "value": "#00FF00"
+    },
+    {
       "name": "Blue",
+      "value": "#0000FF"
+    },
+    {
+      "name": "Blue with White Background",
       "value": "#0000FF"
     },
     {
@@ -21,7 +37,15 @@
       "value": "#FFFF00"
     },
     {
+      "name": "Yellow with Black Background",
+      "value": "#FFFF00"
+    },
+    {
       "name": "Black",
+      "value": "#000000"
+    },
+    {
+      "name": "Black with White Background",
       "value": "#000000"
     }
   ]

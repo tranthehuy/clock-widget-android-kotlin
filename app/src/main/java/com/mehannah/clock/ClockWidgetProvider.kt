@@ -78,6 +78,18 @@ class ClockWidgetProvider : AppWidgetProvider() {
         views.setTextColor(R.id.tvQuote, Color.parseColor(textStyle))
         views.setTextColor(R.id.tvLunarDate, Color.parseColor(textStyle))
 
+        val textStyleString = AppSettings.getString(TEXT_STYLE)
+        if (textStyleString.contains("Background", true)) {
+            if (textStyleString.contains("White Background", true)) {
+                views.setInt(R.id.widget, "setBackgroundColor", Color.WHITE);
+            }
+            if (textStyleString.contains("Black Background", true)) {
+                views.setInt(R.id.widget, "setBackgroundColor", Color.BLACK);
+            }
+        } else {
+            views.setInt(R.id.widget, "setBackgroundColor", Color.TRANSPARENT);
+        }
+
         views.setTextViewTextSize(R.id.clock,TypedValue.COMPLEX_UNIT_SP,
             fontSize.toFloat()
         )
@@ -94,9 +106,13 @@ class ClockWidgetProvider : AppWidgetProvider() {
                 val dateValues = LunarCalendar.convertSolar2Lunar(day, month, year, "7".toDouble());
 
                 val localDateTime = LocalDateTime.of(dateValues[2], dateValues[1], dateValues[0],0,0,0)
-                val formatter = DateTimeFormatter.ofPattern(dateFormat)
+                val lunarFormat = dateFormat
+                    .replace("E", "")
+                    .replace(",", "")
+                val formatter = DateTimeFormatter.ofPattern(lunarFormat)
 
                 val prefix = if (isHadLunarIcon) "🌜" else "Âm lịch "
+
                 val lunarDateStr = prefix + formatter.format(localDateTime)
                 views.setTextViewText(R.id.tvLunarDate, lunarDateStr)
                 views.setViewVisibility(R.id.tvLunarDate, View.VISIBLE)
