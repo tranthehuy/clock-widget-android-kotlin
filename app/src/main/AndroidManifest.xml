@@ -26,7 +26,8 @@
         </activity>
 
         <receiver android:name="ClockWidgetProvider"
-            android:exported="false">
+            android:exported="false"
+            android:label="Standard Style">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

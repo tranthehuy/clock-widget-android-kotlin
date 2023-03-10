@@ -4,11 +4,14 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import com.mehannah.clock.constants.*
+import com.mehannah.clock.pagers.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,35 +21,22 @@ class MainActivity : AppCompatActivity() {
 
         AppSettings.init(this, getString(R.string.app_settings_name))
 
-        initOption(FONT_SIZE, R.raw.font_options, R.id.spFontSize)
-        initOption(DATE_FORMAT, R.raw.date_formats, R.id.spDateFormat)
-        initOption(TIME_FORMAT, R.raw.time_formats, R.id.spTimeFormat)
-        initOption(TEXT_STYLE, R.raw.text_style, R.id.spTextStyle)
+        val pager = findViewById<ViewPager>(R.id.pager)
+        pager.adapter = CollectionPagerAdapter(supportFragmentManager)
 
-        initUpdateButton()
+        val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+        tabLayout.setupWithViewPager(pager)
+
     }
 
-    private fun initOption(name: String, dataId: Int, componentId: Int) {
-        val spinner = findViewById<Spinner>(componentId)
-
-        val options =
-            Utils.getJsonResource<Options>(this, dataId)
-        val items = options.items.map { it -> it?.name ?: "" }
-        if (items.isEmpty()) return;
-
-        val spinnerArrayAdapter = Utils.createItemList(items, this)
-        spinner.adapter = spinnerArrayAdapter
-
-        val currentValue = AppSettings.getString(name, items[0])
-        items.indexOf(currentValue)?.let{
-            spinner.setSelection(it)
-        }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.right_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
-    private fun initUpdateButton () {
-        val updateButton = findViewById<Button>(R.id.btnUpdate)
-
-        updateButton.setOnClickListener(View.OnClickListener {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id: Int = item.itemId
+        if (id == R.id.updateMenuBtn) {
             val spFontSize = findViewById<Spinner>(R.id.spFontSize)
             AppSettings.saveString(FONT_SIZE, spFontSize.selectedItem.toString())
 
@@ -65,12 +55,13 @@ class MainActivity : AppCompatActivity() {
             homeIntent.addCategory(Intent.CATEGORY_HOME)
             homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(homeIntent)
-        })
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun updateWidgets() {
         val intent = Intent(this, ClockWidgetProvider::class.java)
-        intent.action = "android.appwidget.action.APPWIDGET_UPDATE"
+        intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
         val ids = AppWidgetManager.getInstance(application).getAppWidgetIds(
             ComponentName(
                 application,
