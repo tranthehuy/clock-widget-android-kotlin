@@ -1,4 +1,4 @@
-package com.mehannah.clock;
+package com.mehannah.clock.common;
 
 /**
  * @author duc

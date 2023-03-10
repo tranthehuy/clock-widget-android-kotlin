@@ -1,10 +1,10 @@
-package com.mehannah.clock
+package com.mehannah.clock.common
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 
-class AppSettings {
+class Settings {
     companion object {
         private var ref: SharedPreferences? = null
 

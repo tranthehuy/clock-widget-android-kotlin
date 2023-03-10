@@ -1,4 +1,4 @@
-package com.mehannah.clock
+package com.mehannah.clock.common
 
 import android.content.Context
 import android.widget.ArrayAdapter

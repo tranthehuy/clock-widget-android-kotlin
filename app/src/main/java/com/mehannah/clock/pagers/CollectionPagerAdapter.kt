@@ -1,11 +1,9 @@
 package com.mehannah.clock.pagers
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.mehannah.clock.constants.ARG_OBJECT
-import com.mehannah.clock.constants.TABS
+import com.mehannah.clock.common.TABS
 import com.mehannah.clock.fragments.HelpFragment
 import com.mehannah.clock.fragments.LayoutFragment
 import com.mehannah.clock.fragments.SettingFragment

@@ -11,10 +11,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.RemoteViews
-import com.mehannah.clock.constants.DATE_FORMAT
-import com.mehannah.clock.constants.FONT_SIZE
-import com.mehannah.clock.constants.TEXT_STYLE
-import com.mehannah.clock.constants.TIME_FORMAT
+import com.mehannah.clock.common.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -44,22 +41,22 @@ class ClockWidgetProvider : AppWidgetProvider() {
         )
 
         val fontSize = Utils.getOptionValue(
-            AppSettings.getString(FONT_SIZE),
+            Settings.getString(FONT_SIZE),
             Utils.getJsonResource<Options>(context, R.raw.font_options)
         )
 
         val dateFormat = Utils.getOptionValue(
-            AppSettings.getString(DATE_FORMAT),
+            Settings.getString(DATE_FORMAT),
             Utils.getJsonResource<Options>(context, R.raw.date_formats)
         )
 
         val timeFormat = Utils.getOptionValue(
-            AppSettings.getString(TIME_FORMAT),
+            Settings.getString(TIME_FORMAT),
             Utils.getJsonResource<Options>(context, R.raw.time_formats)
         )
 
         val textStyle = Utils.getOptionValue(
-            AppSettings.getString(TEXT_STYLE),
+            Settings.getString(TEXT_STYLE),
             Utils.getJsonResource<Options>(context, R.raw.text_style)
         )
 
@@ -78,7 +75,7 @@ class ClockWidgetProvider : AppWidgetProvider() {
         views.setTextColor(R.id.tvQuote, Color.parseColor(textStyle))
         views.setTextColor(R.id.tvLunarDate, Color.parseColor(textStyle))
 
-        val textStyleString = AppSettings.getString(TEXT_STYLE)
+        val textStyleString = Settings.getString(TEXT_STYLE)
         if (textStyleString.contains("Background", true)) {
             if (textStyleString.contains("White Background", true)) {
                 views.setInt(R.id.widget, "setBackgroundColor", Color.parseColor("#CCFFFFFF"));
@@ -95,7 +92,7 @@ class ClockWidgetProvider : AppWidgetProvider() {
         )
 
         try {
-            val dateSetting = AppSettings.getString(DATE_FORMAT)
+            val dateSetting = Settings.getString(DATE_FORMAT)
             val isHadLunarCalendar = dateSetting.contains("+")
             val isHadLunarIcon = dateSetting.contains("Icon")
             if (isHadLunarCalendar) {
@@ -137,7 +134,7 @@ class ClockWidgetProvider : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        AppSettings.init(context, context.getString(R.string.app_settings_name))
+        Settings.init(context, context.getString(R.string.app_settings_name))
 
         // Get all ids
         val thisWidget = ComponentName(

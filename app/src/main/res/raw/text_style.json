@@ -1,6 +1,14 @@
 {
   "items": [
     {
+      "name": "Black",
+      "value": "#000000"
+    },
+    {
+      "name": "Black with White Background",
+      "value": "#000000"
+    },
+    {
       "name": "White",
       "value": "#FFFFFF"
     },
@@ -39,14 +47,6 @@
     {
       "name": "Yellow with Black Background",
       "value": "#FFFF00"
-    },
-    {
-      "name": "Black",
-      "value": "#000000"
-    },
-    {
-      "name": "Black with White Background",
-      "value": "#000000"
     }
   ]
 }

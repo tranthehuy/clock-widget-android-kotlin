@@ -10,7 +10,7 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.mehannah.clock.constants.*
+import com.mehannah.clock.common.*
 import com.mehannah.clock.pagers.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        AppSettings.init(this, getString(R.string.app_settings_name))
+        Settings.init(this, getString(R.string.app_settings_name))
 
         val pager = findViewById<ViewPager>(R.id.pager)
         pager.adapter = CollectionPagerAdapter(supportFragmentManager)
@@ -38,16 +38,16 @@ class MainActivity : AppCompatActivity() {
         val id: Int = item.itemId
         if (id == R.id.updateMenuBtn) {
             val spFontSize = findViewById<Spinner>(R.id.spFontSize)
-            AppSettings.saveString(FONT_SIZE, spFontSize.selectedItem.toString())
+            Settings.saveString(FONT_SIZE, spFontSize.selectedItem.toString())
 
             val spDateFormat = findViewById<Spinner>(R.id.spDateFormat)
-            AppSettings.saveString(DATE_FORMAT, spDateFormat.selectedItem.toString())
+            Settings.saveString(DATE_FORMAT, spDateFormat.selectedItem.toString())
 
             val spTimeFormat = findViewById<Spinner>(R.id.spTimeFormat)
-            AppSettings.saveString(TIME_FORMAT, spTimeFormat.selectedItem.toString())
+            Settings.saveString(TIME_FORMAT, spTimeFormat.selectedItem.toString())
 
             val spTextStyle = findViewById<Spinner>(R.id.spTextStyle)
-            AppSettings.saveString(TEXT_STYLE, spTextStyle.selectedItem.toString())
+            Settings.saveString(TEXT_STYLE, spTextStyle.selectedItem.toString())
 
             this.updateWidgets()
 

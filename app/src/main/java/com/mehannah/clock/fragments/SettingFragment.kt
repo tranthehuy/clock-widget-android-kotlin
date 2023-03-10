@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Spinner
-import com.mehannah.clock.AppSettings
-import com.mehannah.clock.Options
+import com.mehannah.clock.common.*
 import com.mehannah.clock.R
-import com.mehannah.clock.Utils
-import com.mehannah.clock.constants.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,7 +59,7 @@ class SettingFragment : Fragment() {
         val spinnerArrayAdapter = Utils.createItemList(items, view.context)
         spinner.adapter = spinnerArrayAdapter
 
-        val currentValue = AppSettings.getString(name, items[0])
+        val currentValue = Settings.getString(name, items[0])
         items.indexOf(currentValue)?.let{
             spinner.setSelection(it)
         }
