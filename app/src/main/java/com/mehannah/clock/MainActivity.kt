@@ -13,6 +13,12 @@ import com.google.android.material.tabs.TabLayout
 import com.mehannah.clock.common.*
 import com.mehannah.clock.pagers.*
 
+private val tabIcons = intArrayOf(
+    android.R.drawable.ic_menu_preferences,
+    android.R.drawable.ic_menu_compass,
+    android.R.drawable.ic_menu_share
+)
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         val tabLayout = findViewById<TabLayout>(R.id.tabLayout)
         tabLayout.setupWithViewPager(pager)
 
+        tabLayout.getTabAt(0)?.setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1)?.setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2)?.setIcon(tabIcons[2]);
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
